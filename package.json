@@ -1,17 +1,29 @@
 {
-  "name": "boardgames",
-  "version": "1.0.0",
+  "name": "board-games-app",
+  "private": true,
+  "version": "0.0.0",
   "homepage": "https://nashi1337.github.io/boardgames",
-  "description": "",
-  "main": "dist/index.js",
+  "type": "module",
   "scripts": {
-    "build": "tsc"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "gh-pages": "^6.3.0",
-    "typescript": "^5.5.3"
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5"
   },
-  "private": true
+  "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
+    "@vitejs/plugin-react": "^4.7.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-hook-form": "^7.60.0",
+    "react-router-dom": "^7.7.0",
+    "yup": "^1.6.1"
+  }
 }
