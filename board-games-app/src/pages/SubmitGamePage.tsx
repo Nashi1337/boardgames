@@ -1,9 +1,4 @@
-import React from 'react';
-import {useForm} from 'react-hook-form';
-import {yupResolver} from "@hookform/resolvers/yup";
-import * as yup from "yup";
-
-type FormData = {
+/*type FormData = {
     name: string;
     minPlayers: number;
     maxPlayers: number;
@@ -11,22 +6,22 @@ type FormData = {
     genre: string;
     boxImageFront: FileList;
     boxImageBack: FileList;
-    rulesPdf?: FileList;
+    rulesPdf?: File;
 };
 
 const schema = yup.object({
-    name: yup.string().required(),
-    minPlayers: yup.number().required().min(1),
-    maxPlayers: yup.number().required().min(yup.ref('minPlayers')),
-    language: yup.string().required(),
-    genre: yup.string().required(),
-    boxImageFront: yup.mixed().required(),
-    boxImageBack: yup.mixed().required(),
-    rulesPdf: yup.mixed<FileList>().notRequired().nullable(),
-}).required();
+    name:           yup.string().required(),
+    minPlayers:     yup.number().required().min(1),
+    maxPlayers:     yup.number().required().min(yup.ref('minPlayers')),
+    language:       yup.string().required(),
+    genre:          yup.string().required(),
+    boxImageFront:  yup.mixed().required(),
+    boxImageBack:   yup.mixed().required(),
+    rulesPdf:       yup.mixed<File>().optional().nullable(),
+});*/
 
 export default function SubmitGamePage(){
-    const {register,handleSubmit,formState:{errors}}=useForm<FormData>({
+    /*const {register,handleSubmit}=useForm<FormData>({
         resolver: yupResolver(schema),
     });
 
@@ -48,24 +43,24 @@ export default function SubmitGamePage(){
             .then(res=>res.json())
             .then(() => alert('Game submitted!'))
             .catch(err => console.error(err));
-    };
+    };*/
 
     return(
-        <form onSubmit={handleSubmit(onSubmit)} className={"max-w-lg mx-auto p-6 space-y-4"}>
-            <input {...register('name')} placeholder={"Name"} className={"w-full border p-2 rounded"}/>
-            {errors.name && <p className={"text-red-600"}>Required</p>}
+        <form onSubmit={() => console.log("submit logic")} className={"max-w-lg mx-auto p-6 space-y-4"}>
+            <input placeholder={"Name"} className={"w-full border p-2 rounded"}/>
+            {Error.name && <p className={"text-red-600"}>Required</p>}
             <div className={"flex space-x-4"}>
-                <input type={"number"} {...register('minPlayers')} placeholder={"Min Players"} className={"border p-2 rounded w-1/2"}/>
-                <input type="number" {...register('maxPlayers')} placeholder="Max Players" className="border p-2 rounded w-1/2" />
+                <input type={"number"} placeholder={"Min Players"} className={"border p-2 rounded w-1/2"}/>
+                <input type="number" placeholder="Max Players" className="border p-2 rounded w-1/2" />
             </div>
-            <select {...register('language')} className="w-full border p-2 rounded">
+            <select className="w-full border p-2 rounded">
                 <option value="">Language</option>
                 <option>English</option>
                 <option>German</option>
                 <option>French</option>
             </select>
 
-            <select {...register('genre')} className="w-full border p-2 rounded">
+            <select className="w-full border p-2 rounded">
                 <option value="">Genre</option>
                 <option>Strategy</option>
                 <option>Party</option>
@@ -75,15 +70,15 @@ export default function SubmitGamePage(){
 
             <div>
                 <label>Box Image 1:</label>
-                <input type="file" accept="image/*" {...register('boxImageFront')} />
+                <input type="file" accept="image/*"  />
             </div>
             <div>
                 <label>Box Image 2:</label>
-                <input type="file" accept="image/*" {...register('boxImageBack')} />
+                <input type="file" accept="image/*"  />
             </div>
             <div>
                 <label>Rules PDF (optional):</label>
-                <input type="file" accept="application/pdf" {...register('rulesPdf')} />
+                <input type="file" accept="application/pdf"  />
             </div>
 
             <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">

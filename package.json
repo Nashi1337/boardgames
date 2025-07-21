@@ -1,6 +1,7 @@
 {
   "name": "boardgames",
   "version": "1.0.0",
+  "homepage": "https://nashi1337.github.io/boardgames",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -9,6 +10,7 @@
   "devDependencies": {
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "gh-pages": "^6.3.0",
     "typescript": "^5.5.3"
   },
   "private": true
