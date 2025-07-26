@@ -75,6 +75,8 @@ const allGenres = Array.from(
     )
 );
 
+const SHEETY_BASE = 'https://api.sheety.co/978b4feb013391a999eac193c7a19ef0/fmiBoardgames/boardgames';
+
 export default function GameListPage(){
     const [allGames, setAllGames] = useState<BoardGame[]>([]);
     const [filters, setFilters] = useState<Filters>({
@@ -87,8 +89,23 @@ export default function GameListPage(){
     const [popupSrc, setPopupSrc] = useState<string | null>(null);
 
     useEffect(() => {
-        //TODO: api call
-        setAllGames(mockGames);
+        fetch(`${SHEETY_BASE}`)
+            .then((r) => r.json())
+            .then((data) => {
+                console.log(data);
+                const games: BoardGame[] = data.boardgames.map((row:any)=>({
+                    id: row.id,
+                    name: row.name,
+                    minPlayers: Number(row.minPlayers),
+                    maxPlayers: Number(row.maxPlayers),
+                    language:row.language,
+                    genres:row.genres.split(","),
+                    boxImageFrontUrl: row.boxImageFrontUrl,
+                    boxImageBackUrl: row.boxImageBackUrl,
+                    rulesPdfUrl: row.rulesPdfUrl || undefined,
+                }));
+                setAllGames(games);
+            })
     }, []);
 
     useEffect(() => {
